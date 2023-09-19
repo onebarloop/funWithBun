@@ -1,15 +1,12 @@
-# test
+# Fun with Bun
 
-To install dependencies:
+and
 
-```bash
-bun install
 ```
+     _    ____   ____ ___ ___
+    / \  / ___| / ___|_ _|_ _|
+   / _ \ \___ \| |    | | | |
+  / ___ \ ___) | |___ | | | |
+ /_/   \_\____/ \____|___|___|
 
-To run:
-
-```bash
-bun run index.ts
 ```
-
-This project was created using `bun init` in bun v1.0.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

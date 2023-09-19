@@ -1,25 +1,40 @@
-<h1>
-  <form method="post">
-    <input id="input" />
-    <button id="sumbit">Submit</button>
-  </form>
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍞</title>
+  </head>
+  <body>
+    <form method="post">
+      <input />
+      <button type="submit">Submit</button>
+    </form>
 
-<script>
-  const form = document.querySelector('form');
+    <div style="background-color: black">
+      <pre style="color: white"></pre>
+    </div>
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const input = document.querySelector('input');
+    <script>
+      const form = document.querySelector('form');
+      const input = document.querySelector('input');
+      const field = document.querySelector('pre');
 
-    console.log(input.value);
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const response = await fetch('http://localhost:3000/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-      body: input.value,
-    });
-  });
-</script>
+        const response = await fetch('http://localhost:3000/ascii', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          body: input.value,
+        });
+
+        const ascii = await response.text();
+
+        field.textContent = ascii;
+      });
+    </script>
+  </body>
+</html>

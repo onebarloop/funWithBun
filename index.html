@@ -1,1 +1,25 @@
-<h1>Hello</h1>
+<h1>
+  <form method="post">
+    <input id="input" />
+    <button id="sumbit">Submit</button>
+  </form>
+</h1>
+
+<script>
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.querySelector('input');
+
+    console.log(input.value);
+
+    const response = await fetch('http://localhost:3000/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      body: input.value,
+    });
+  });
+</script>

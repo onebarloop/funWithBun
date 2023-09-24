@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "asciify",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
@@ -10,7 +10,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@types/inquirer": "^9.0.3",
     "chalk": "^5.3.0",
-    "figlet": "^1.6.0"
+    "figlet": "^1.6.0",
+    "inquirer": "^9.2.11"
   }
 }

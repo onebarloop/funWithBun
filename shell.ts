@@ -1,8 +1,17 @@
 import figlet from 'figlet';
-import chalk, { ForegroundColorName } from 'chalk';
+import chalk, {
+  BackgroundColorName,
+  ForegroundColorName,
+  backgroundColorNames,
+  foregroundColorNames,
+} from 'chalk';
 
-const asciify = (color: ForegroundColorName, text: string) => {
-  const ascii = chalk[color](
+const asciify = (
+  color: ForegroundColorName,
+  bg: BackgroundColorName,
+  text: string
+) => {
+  const ascii = chalk[color][bg].bold(
     figlet.textSync(text, {
       horizontalLayout: 'default',
       verticalLayout: 'full',
@@ -12,22 +21,30 @@ const asciify = (color: ForegroundColorName, text: string) => {
 };
 
 let color: ForegroundColorName | null = null;
+let background: BackgroundColorName | null = null;
 
-console.log('please give me a color(red, blue, green): ');
+console.log(`please give me a color: ${chalk.red(foregroundColorNames)} `);
 
 for await (const chunk of Bun.stdin.stream()) {
   const input = Buffer.from(chunk).toString().trim();
-  console.log('Now text please ');
+  console.log(
+    `please give me a backgoundcolor: ${chalk.green(backgroundColorNames)} `
+  );
   if (!color) {
-    if (input === 'green' || input === 'red' || input === 'blue') {
+    if (foregroundColorNames.includes(input as ForegroundColorName)) {
       color = input as ForegroundColorName;
     } else {
       color = 'white';
     }
+  } else if (!background) {
+    console.log('Now enter some text...');
+    if (backgroundColorNames.includes(input as BackgroundColorName)) {
+      background = input as BackgroundColorName;
+    } else {
+      background = 'bgBlack';
+    }
   } else {
-    const text = Buffer.from(chunk).toString();
-    const res = asciify(color, text);
-
+    const res = asciify(color, background, input);
     console.log(res);
   }
 }

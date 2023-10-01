@@ -28,6 +28,31 @@ const asciify = (
   );
   return ascii;
 };
+
+const askAgain = (
+  color: ForegroundColorName,
+  bgColor: BackgroundColorName,
+  randFont: figlet.Fonts
+) => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'text',
+        message: 'Please enter your text',
+      },
+    ])
+    .then(({ text }) => {
+      console.log(asciify(color, bgColor, text, randFont));
+      console.log(`This font is called ${randFont}`);
+    })
+    .then(() => {
+      askAgain(color, bgColor, randFont);
+    });
+};
+
+// user prompts
+
 console.log(
   `****\nWelcome to\n${asciify(
     'magentaBright',
@@ -81,28 +106,6 @@ inquirer
   .then(({ color, bgColor, randFont }) => {
     askAgain(color, bgColor, randFont);
   });
-
-const askAgain = (
-  color: ForegroundColorName,
-  bgColor: BackgroundColorName,
-  randFont: figlet.Fonts
-) => {
-  inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'text',
-        message: 'Please enter your text',
-      },
-    ])
-    .then(({ text }) => {
-      console.log(asciify(color, bgColor, text, randFont));
-      console.log(`This font is called ${randFont}`);
-    })
-    .then(() => {
-      askAgain(color, bgColor, randFont);
-    });
-};
 
 // let color: ForegroundColorName | null = null;
 // let background: BackgroundColorName | null = null;

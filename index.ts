@@ -64,14 +64,45 @@ inquirer
     } else {
       color = 'white';
     }
-    if (backgroundColorNames.includes(color as BackgroundColorName)) {
+    if (backgroundColorNames.includes(bgColor as BackgroundColorName)) {
       bgColor = bgColor as BackgroundColorName;
     } else {
       bgColor = 'bgBlack';
     }
     console.log(asciify(color, bgColor, text, randFont));
     console.log(`This font is called ${randFont}`);
+    const answers = {
+      color,
+      bgColor,
+      randFont,
+    };
+    return answers;
+  })
+  .then(({ color, bgColor, randFont }) => {
+    askAgain(color, bgColor, randFont);
   });
+
+const askAgain = (
+  color: ForegroundColorName,
+  bgColor: BackgroundColorName,
+  randFont: figlet.Fonts
+) => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'text',
+        message: 'Please enter your text',
+      },
+    ])
+    .then(({ text }) => {
+      console.log(asciify(color, bgColor, text, randFont));
+      console.log(`This font is called ${randFont}`);
+    })
+    .then(() => {
+      askAgain(color, bgColor, randFont);
+    });
+};
 
 // let color: ForegroundColorName | null = null;
 // let background: BackgroundColorName | null = null;

@@ -96,15 +96,11 @@ inquirer
     }
     console.log(asciify(color, bgColor, text, randFont));
     console.log(`This font is called ${randFont}`);
-    const answers = {
-      color,
-      bgColor,
-      randFont,
-    };
-    return answers;
+
+    return { color, bgColor, randFont };
   })
   .then(({ color, bgColor, randFont }) => {
-    askAgain(color, bgColor, randFont);
+    return askAgain(color, bgColor, randFont);
   });
 
 // let color: ForegroundColorName | null = null;
